@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\LogicGameGeom.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F22222E8-EA34-496B-9914-1B199D79D62F}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\LogicGameGeom.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\LogicGameGeomEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Bag.txt" />
+    <None Include="..\..\Help.txt" />
+    <None Include="..\..\README.md" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{D314C185-8BBF-46F2-A245-CEFE580C47AC}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\LogicGameGeom">
+      <UniqueIdentifier>{714D7F7D-BFA5-43BE-ACB9-51F2AD0EE9BE}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\LogicGameGeom\LogicGameGeom.Build.cs">
+      <Filter>Source\LogicGameGeom</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\LogicGameGeom\LogicGameGeom.cpp">
+      <Filter>Source\LogicGameGeom</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LogicGameGeom\LogicGameGeom.h">
+      <Filter>Source\LogicGameGeom</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\LogicGameGeom\MyBlueprintFunctionLibrary.cpp">
+      <Filter>Source\LogicGameGeom</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LogicGameGeom\MyBlueprintFunctionLibrary.h">
+      <Filter>Source\LogicGameGeom</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\LogicGameGeom\MyClass.cpp">
+      <Filter>Source\LogicGameGeom</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LogicGameGeom\MyClass.h">
+      <Filter>Source\LogicGameGeom</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\LogicGameGeom\MyCPPLogic.cpp">
+      <Filter>Source\LogicGameGeom</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LogicGameGeom\MyCPPLogic.h">
+      <Filter>Source\LogicGameGeom</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

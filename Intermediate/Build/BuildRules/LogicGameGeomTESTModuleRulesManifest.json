@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"C:\\UnrealProject\\LogicGameGeom TEST\\Source\\LogicGameGeom\\LogicGameGeom.Build.cs",
+		"C:\\UnrealProject\\LogicGameGeom TEST\\Source\\LogicGameGeom.Target.cs",
+		"C:\\UnrealProject\\LogicGameGeom TEST\\Source\\LogicGameGeomEditor.Target.cs"
+	],
+	"EngineVersion": "4.26.2"
+}

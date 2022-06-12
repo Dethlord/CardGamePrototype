@@ -1,0 +1,3 @@
+C:\Users\Gigabyte\Documents\Unreal Projects\LogicGameGeom\Source\LogicGameGeom\LogicGameGeom.Build.cs
+C:\Users\Gigabyte\Documents\Unreal Projects\LogicGameGeom\Source\LogicGameGeom.Target.cs
+C:\Users\Gigabyte\Documents\Unreal Projects\LogicGameGeom\Source\LogicGameGeomEditor.Target.cs

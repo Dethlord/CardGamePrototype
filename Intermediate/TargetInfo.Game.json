@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "LogicGameGeom",
+			"Path": "C:\\UnrealProject\\LogicGameGeom\\Source\\LogicGameGeom.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "LogicGameGeomEditor",
+			"Path": "C:\\UnrealProject\\LogicGameGeom\\Source\\LogicGameGeomEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

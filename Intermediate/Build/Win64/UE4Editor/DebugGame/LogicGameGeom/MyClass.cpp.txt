@@ -1,0 +1,2 @@
+C:\UnrealProject\LogicGameGeom\Intermediate\Build\Win64\UE4Editor\DebugGame\LogicGameGeom\Definitions.LogicGameGeom.h
+C:\UnrealProject\LogicGameGeom\Source\LogicGameGeom\MyClass.h
