@@ -38,7 +38,7 @@ int32 debug(false);
 void UMyBlueprintFunctionLibrary::GetCardsPlayer(int Player, UPARAM(ref)TArray<int32>& Array, TArray<int32>& PlayerDeck)
 {
 	//int32 result;
-	int32 debug(true);
+	int32 debug(false);
 	//int32 temp;
 		
 	for (int32 card = Player; card < Array.Num(); card+=4){
@@ -99,7 +99,7 @@ void UMyBlueprintFunctionLibrary::GetCardColumn(int Card, int& result)
 	/// <param name="Vcoords"></param>
 void UMyBlueprintFunctionLibrary::GetCoordsUV(int IDcard, float& Ucoords, float& Vcoords)
 {
-	int32 debug(true);
+	int32 debug(false);
 	const int MaxRows(4);
 	IDcard--;
 	Ucoords = IDcard / MaxRows;

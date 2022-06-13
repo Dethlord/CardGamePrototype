@@ -4,7 +4,7 @@
 	"Configuration": "Development",
 	"TargetType": "Editor",
 	"Architecture": "",
-	"Project": "../../LogicGameGeom.uproject",
+	"Project": "../../LogicGameGeomTEST.uproject",
 	"Launch": "$(EngineDir)/Binaries/Win64/UE4Editor.exe",
 	"Version": 
 	{
@@ -4870,7 +4870,7 @@
 	],
 	"RuntimeDependencies": [
 		{
-			"Path": "$(ProjectDir)/LogicGameGeom.uproject",
+			"Path": "$(ProjectDir)/LogicGameGeomTEST.uproject",
 			"Type": "UFS"
 		},
 		{
