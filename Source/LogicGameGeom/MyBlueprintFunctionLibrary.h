@@ -5,11 +5,10 @@
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "MyBlueprintFunctionLibrary.generated.h"
-
+DECLARE_LOG_CATEGORY_EXTERN(test3, Warning, All);//Обьявление кастомной категории
 /**
  * 
  */
-
 
 UCLASS()
 class LOGICGAMEGEOM_API UMyBlueprintFunctionLibrary : public UBlueprintFunctionLibrary

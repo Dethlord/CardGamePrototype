@@ -9,6 +9,7 @@
 #include "Kismet/KismetArrayLibrary.h"
 #include "Algo/Reverse.h"
 
+DEFINE_LOG_CATEGORY(test3);// Определение кастомной категории
 int Sub(TArray<int32> Array)
 {
 	for (int32 element : Array)	{
@@ -22,14 +23,14 @@ int Sub(TArray<int32> Array)
 
 void UMyBlueprintFunctionLibrary::GenerateDeck(int Cards, TArray<int32>& Deck)
 {
-int32 debug(false);
+int32 debug(true);
 	/*int32 rand,temp;*/
 	
 	for (int32 card = 1; card <= Cards; card++) { Deck.Add(card); }
 	
 	if (debug) {
 		for (int32 element : Deck)	{
-			UE_LOG(LogTemp, Warning, TEXT("elem %i"), element);
+			UE_LOG(test3, Warning, TEXT("elem %i"), element);
 			
 		}
 	}
