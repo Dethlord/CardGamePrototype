@@ -9,7 +9,7 @@
 #include "Kismet/KismetArrayLibrary.h"
 #include "Algo/Reverse.h"
 
-DEFINE_LOG_CATEGORY(test3);// Определение кастомной категории
+//DEFINE_LOG_CATEGORY(test3);// Определение кастомной категории
 int Sub(TArray<int32> Array)
 {
 	for (int32 element : Array)	{
@@ -30,11 +30,36 @@ int32 debug(true);
 	
 	if (debug) {
 		for (int32 element : Deck)	{
-			UE_LOG(test3, Warning, TEXT("elem %i"), element);
+			//UE_LOG(test3, Warning, TEXT("elem %i"), element);
 			
 		}
 	}
 }
+
+void UMyBlueprintFunctionLibrary::ValidateMove(int Card, UPARAM(ref)TArray<AActor*>& PlayerHandCards, bool& result, int TrampSuit)
+{
+	//result = PlayerHandCards.Contains(TEXT("Hello"))
+	for (AActor* Actor : PlayerHandCards)
+	{
+		
+		UE_LOG(LogTemp, Warning, TEXT("elem %s"), *Actor->GetName());
+		
+	}
+
+	
+
+
+		/*if (TrampSuit) {
+
+			UE_LOG(LogTemp, Warning, TEXT("TrampSuit = 5"));
+		}
+		else {
+			UE_LOG(LogTemp, Warning, TEXT("TrampSuit <> 5"));
+		}*/
+}
+
+
+
 
 void UMyBlueprintFunctionLibrary::GetCardsPlayer(int Player, UPARAM(ref)TArray<int32>& Array, TArray<int32>& PlayerDeck)
 {

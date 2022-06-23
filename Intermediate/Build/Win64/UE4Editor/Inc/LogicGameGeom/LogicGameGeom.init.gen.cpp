@@ -21,7 +21,7 @@ void EmptyLinkFunctionForGeneratedCodeLogicGameGeom_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0xAD154A24,
+				0xE7658FBA,
 				0x460D9C7A,
 				METADATA_PARAMS(nullptr, 0)
 			};

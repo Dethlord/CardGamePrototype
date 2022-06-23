@@ -8,13 +8,14 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class AActor;
 #ifdef LOGICGAMEGEOM_MyBlueprintFunctionLibrary_generated_h
 #error "MyBlueprintFunctionLibrary.generated.h already included, missing '#pragma once' in MyBlueprintFunctionLibrary.h"
 #endif
 #define LOGICGAMEGEOM_MyBlueprintFunctionLibrary_generated_h
 
-#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_SPARSE_DATA
-#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_RPC_WRAPPERS \
+#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_SPARSE_DATA
+#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execGetDebugSuitsAndValues); \
 	DECLARE_FUNCTION(execGetPowerHands); \
@@ -23,10 +24,11 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_FUNCTION(execGetCardColumn); \
 	DECLARE_FUNCTION(execNormalization); \
 	DECLARE_FUNCTION(execGetCardsPlayer); \
+	DECLARE_FUNCTION(execValidateMove); \
 	DECLARE_FUNCTION(execGenerateDeck);
 
 
-#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
+#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execGetDebugSuitsAndValues); \
 	DECLARE_FUNCTION(execGetPowerHands); \
@@ -35,10 +37,11 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_FUNCTION(execGetCardColumn); \
 	DECLARE_FUNCTION(execNormalization); \
 	DECLARE_FUNCTION(execGetCardsPlayer); \
+	DECLARE_FUNCTION(execValidateMove); \
 	DECLARE_FUNCTION(execGenerateDeck);
 
 
-#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_INCLASS_NO_PURE_DECLS \
+#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUMyBlueprintFunctionLibrary(); \
 	friend struct Z_Construct_UClass_UMyBlueprintFunctionLibrary_Statics; \
@@ -47,7 +50,7 @@ public: \
 	DECLARE_SERIALIZER(UMyBlueprintFunctionLibrary)
 
 
-#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_INCLASS \
+#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_INCLASS \
 private: \
 	static void StaticRegisterNativesUMyBlueprintFunctionLibrary(); \
 	friend struct Z_Construct_UClass_UMyBlueprintFunctionLibrary_Statics; \
@@ -56,7 +59,7 @@ public: \
 	DECLARE_SERIALIZER(UMyBlueprintFunctionLibrary)
 
 
-#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_STANDARD_CONSTRUCTORS \
+#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UMyBlueprintFunctionLibrary(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UMyBlueprintFunctionLibrary) \
@@ -69,7 +72,7 @@ private: \
 public:
 
 
-#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_ENHANCED_CONSTRUCTORS \
+#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UMyBlueprintFunctionLibrary(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
 private: \
@@ -82,28 +85,28 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UMyBlueprintFunctionLibrary); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UMyBlueprintFunctionLibrary)
 
 
-#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_PRIVATE_PROPERTY_OFFSET
+#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_PRIVATE_PROPERTY_OFFSET
 #define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_13_PROLOG
-#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_GENERATED_BODY_LEGACY \
+#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_PRIVATE_PROPERTY_OFFSET \
-	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_SPARSE_DATA \
-	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_RPC_WRAPPERS \
-	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_INCLASS \
-	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_STANDARD_CONSTRUCTORS \
+	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_PRIVATE_PROPERTY_OFFSET \
+	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_SPARSE_DATA \
+	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_RPC_WRAPPERS \
+	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_INCLASS \
+	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_GENERATED_BODY \
+#define LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_PRIVATE_PROPERTY_OFFSET \
-	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_SPARSE_DATA \
-	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
-	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_INCLASS_NO_PURE_DECLS \
-	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_16_ENHANCED_CONSTRUCTORS \
+	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_PRIVATE_PROPERTY_OFFSET \
+	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_SPARSE_DATA \
+	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_RPC_WRAPPERS_NO_PURE_DECLS \
+	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_INCLASS_NO_PURE_DECLS \
+	LogicGameGeom_TEST_Source_LogicGameGeom_MyBlueprintFunctionLibrary_h_21_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

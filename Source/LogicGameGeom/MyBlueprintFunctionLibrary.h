@@ -5,18 +5,32 @@
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "MyBlueprintFunctionLibrary.generated.h"
-DECLARE_LOG_CATEGORY_EXTERN(test3, Warning, All);//Обьявление кастомной категории
+//DECLARE_LOG_CATEGORY_EXTERN(test3, Warning, All);//Обьявление кастомной категории
 /**
  * 
  */
 
 UCLASS()
+
+
+
+
+
 class LOGICGAMEGEOM_API UMyBlueprintFunctionLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
+
+		
+
+
 //Функция генерации случайной колоды
 	UFUNCTION(BlueprintCallable)
 		static void GenerateDeck(int Cards, TArray<int32>& Deck);
+	//Функция разрешенности хода
+	UFUNCTION(BlueprintCallable)
+		static void ValidateMove(int Card, UPARAM(ref)TArray<AActor*>& PlayerHandCards,bool& result,int TrampSuit = -1 );
+
+
 	//Функция возврата всех карт на руках
 	UFUNCTION(BlueprintCallable)
 		static void GetCardsPlayer(int Player, UPARAM(ref)TArray<int32>& Array, TArray<int32>& PlayerDeck);
