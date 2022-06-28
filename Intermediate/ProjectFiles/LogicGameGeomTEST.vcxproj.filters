@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\LogicGameGeomTEST.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{CDC08289-90B6-4CCE-84B8-41E28CAC81F1}</UniqueIdentifier>
+      <UniqueIdentifier>{051736E5-82E6-4756-82A7-A2F28579968B}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\LogicGameGeom.Target.cs">
       <Filter>Source</Filter>
@@ -17,7 +17,7 @@
     <None Include="..\..\Help.txt" />
     <None Include="..\..\README.md" />
     <Filter Include="Config">
-      <UniqueIdentifier>{BD3EC0D6-E43B-48A6-8828-EF4AFD081D74}</UniqueIdentifier>
+      <UniqueIdentifier>{4FEE8040-51C0-4717-B1F5-0CD2D2EA775C}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEngine.ini">
       <Filter>Config</Filter>
@@ -26,8 +26,14 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\LogicGameGeom">
-      <UniqueIdentifier>{573ADDBE-161F-40C6-B353-3861DA9A6853}</UniqueIdentifier>
+      <UniqueIdentifier>{ABCB9E7F-C1E0-4979-A014-13BCF56B1C6E}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\LogicGameGeom\GameLogic.cpp">
+      <Filter>Source\LogicGameGeom</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LogicGameGeom\GameLogic.h">
+      <Filter>Source\LogicGameGeom</Filter>
+    </ClInclude>
     <None Include="..\..\Source\LogicGameGeom\LogicGameGeom.Build.cs">
       <Filter>Source\LogicGameGeom</Filter>
     </None>
@@ -53,6 +59,12 @@
       <Filter>Source\LogicGameGeom</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\LogicGameGeom\MyCPPLogic.h">
+      <Filter>Source\LogicGameGeom</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\LogicGameGeom\Spawner.cpp">
+      <Filter>Source\LogicGameGeom</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LogicGameGeom\Spawner.h">
       <Filter>Source\LogicGameGeom</Filter>
     </ClInclude>
   </ItemGroup>

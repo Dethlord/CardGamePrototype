@@ -23,12 +23,12 @@ class LOGICGAMEGEOM_API UMyBlueprintFunctionLibrary : public UBlueprintFunctionL
 		
 
 
-//Функция генерации случайной колоды
+    //Функция генерации случайной колоды
 	UFUNCTION(BlueprintCallable)
 		static void GenerateDeck(int Cards, TArray<int32>& Deck);
 	//Функция разрешенности хода
 	UFUNCTION(BlueprintCallable)
-		static void ValidateMove(int Card, UPARAM(ref)TArray<AActor*>& PlayerHandCards,bool& result,int TrampSuit = -1 );
+		static void ValidateMove(int Card,int CardOnTable, UPARAM(ref)TArray<AActor*>& PlayerHandCards,bool& result,int TrampSuit = -1 );
 
 
 	//Функция возврата всех карт на руках
@@ -57,7 +57,7 @@ class LOGICGAMEGEOM_API UMyBlueprintFunctionLibrary : public UBlueprintFunctionL
 	
 	UFUNCTION(BlueprintCallable)
 		static void GetDebugSuitsAndValues(UPARAM(ref)TArray<int32>& Array, FString& result);
-
-
+	
+	static int GetIntByString(UObject* object, FString VariableName);
 	
 };

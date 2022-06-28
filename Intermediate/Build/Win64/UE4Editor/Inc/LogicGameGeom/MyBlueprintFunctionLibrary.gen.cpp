@@ -89,12 +89,13 @@ void EmptyLinkFunctionForGeneratedCodeMyBlueprintFunctionLibrary() {}
 	DEFINE_FUNCTION(UMyBlueprintFunctionLibrary::execValidateMove)
 	{
 		P_GET_PROPERTY(FIntProperty,Z_Param_Card);
+		P_GET_PROPERTY(FIntProperty,Z_Param_CardOnTable);
 		P_GET_TARRAY_REF(AActor*,Z_Param_Out_PlayerHandCards);
 		P_GET_UBOOL_REF(Z_Param_Out_result);
 		P_GET_PROPERTY(FIntProperty,Z_Param_TrampSuit);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		UMyBlueprintFunctionLibrary::ValidateMove(Z_Param_Card,Z_Param_Out_PlayerHandCards,Z_Param_Out_result,Z_Param_TrampSuit);
+		UMyBlueprintFunctionLibrary::ValidateMove(Z_Param_Card,Z_Param_CardOnTable,Z_Param_Out_PlayerHandCards,Z_Param_Out_result,Z_Param_TrampSuit);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(UMyBlueprintFunctionLibrary::execGenerateDeck)
@@ -466,11 +467,13 @@ void EmptyLinkFunctionForGeneratedCodeMyBlueprintFunctionLibrary() {}
 		struct MyBlueprintFunctionLibrary_eventValidateMove_Parms
 		{
 			int32 Card;
+			int32 CardOnTable;
 			TArray<AActor*> PlayerHandCards;
 			bool result;
 			int32 TrampSuit;
 		};
 		static const UE4CodeGen_Private::FUnsizedIntPropertyParams NewProp_Card;
+		static const UE4CodeGen_Private::FUnsizedIntPropertyParams NewProp_CardOnTable;
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_PlayerHandCards_Inner;
 		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_PlayerHandCards;
 		static void NewProp_result_SetBit(void* Obj);
@@ -483,6 +486,7 @@ void EmptyLinkFunctionForGeneratedCodeMyBlueprintFunctionLibrary() {}
 		static const UE4CodeGen_Private::FFunctionParams FuncParams;
 	};
 	const UE4CodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_UMyBlueprintFunctionLibrary_ValidateMove_Statics::NewProp_Card = { "Card", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyBlueprintFunctionLibrary_eventValidateMove_Parms, Card), METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_UMyBlueprintFunctionLibrary_ValidateMove_Statics::NewProp_CardOnTable = { "CardOnTable", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyBlueprintFunctionLibrary_eventValidateMove_Parms, CardOnTable), METADATA_PARAMS(nullptr, 0) };
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UMyBlueprintFunctionLibrary_ValidateMove_Statics::NewProp_PlayerHandCards_Inner = { "PlayerHandCards", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(nullptr, 0) };
 	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UMyBlueprintFunctionLibrary_ValidateMove_Statics::NewProp_PlayerHandCards = { "PlayerHandCards", nullptr, (EPropertyFlags)0x0010000008000180, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyBlueprintFunctionLibrary_eventValidateMove_Parms, PlayerHandCards), EArrayPropertyFlags::None, METADATA_PARAMS(nullptr, 0) };
 	void Z_Construct_UFunction_UMyBlueprintFunctionLibrary_ValidateMove_Statics::NewProp_result_SetBit(void* Obj)
@@ -493,6 +497,7 @@ void EmptyLinkFunctionForGeneratedCodeMyBlueprintFunctionLibrary() {}
 	const UE4CodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_UMyBlueprintFunctionLibrary_ValidateMove_Statics::NewProp_TrampSuit = { "TrampSuit", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyBlueprintFunctionLibrary_eventValidateMove_Parms, TrampSuit), METADATA_PARAMS(nullptr, 0) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UMyBlueprintFunctionLibrary_ValidateMove_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UMyBlueprintFunctionLibrary_ValidateMove_Statics::NewProp_Card,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UMyBlueprintFunctionLibrary_ValidateMove_Statics::NewProp_CardOnTable,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UMyBlueprintFunctionLibrary_ValidateMove_Statics::NewProp_PlayerHandCards_Inner,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UMyBlueprintFunctionLibrary_ValidateMove_Statics::NewProp_PlayerHandCards,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UMyBlueprintFunctionLibrary_ValidateMove_Statics::NewProp_result,
@@ -542,7 +547,7 @@ void EmptyLinkFunctionForGeneratedCodeMyBlueprintFunctionLibrary() {}
 		{ &Z_Construct_UFunction_UMyBlueprintFunctionLibrary_GetPowerHands, "GetPowerHands" }, // 1050521040
 		{ &Z_Construct_UFunction_UMyBlueprintFunctionLibrary_Normalization, "Normalization" }, // 4242531139
 		{ &Z_Construct_UFunction_UMyBlueprintFunctionLibrary_SortSuitsAndValues, "SortSuitsAndValues" }, // 3535228894
-		{ &Z_Construct_UFunction_UMyBlueprintFunctionLibrary_ValidateMove, "ValidateMove" }, // 1719715611
+		{ &Z_Construct_UFunction_UMyBlueprintFunctionLibrary_ValidateMove, "ValidateMove" }, // 1304048458
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMyBlueprintFunctionLibrary_Statics::Class_MetaDataParams[] = {
@@ -578,7 +583,7 @@ void EmptyLinkFunctionForGeneratedCodeMyBlueprintFunctionLibrary() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UMyBlueprintFunctionLibrary, 2614309476);
+	IMPLEMENT_CLASS(UMyBlueprintFunctionLibrary, 355110746);
 	template<> LOGICGAMEGEOM_API UClass* StaticClass<UMyBlueprintFunctionLibrary>()
 	{
 		return UMyBlueprintFunctionLibrary::StaticClass();

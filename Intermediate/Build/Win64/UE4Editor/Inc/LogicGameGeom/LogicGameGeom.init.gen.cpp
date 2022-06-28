@@ -21,8 +21,8 @@ void EmptyLinkFunctionForGeneratedCodeLogicGameGeom_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0xE7658FBA,
-				0x460D9C7A,
+				0x3C15BA7D,
+				0x168E36B2,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UE4CodeGen_Private::ConstructUPackage(ReturnPackage, PackageParams);

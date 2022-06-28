@@ -36,14 +36,15 @@ int32 debug(true);
 	}
 }
 
-void UMyBlueprintFunctionLibrary::ValidateMove(int Card, UPARAM(ref)TArray<AActor*>& PlayerHandCards, bool& result, int TrampSuit)
+void UMyBlueprintFunctionLibrary::ValidateMove(int Card, int CardOnTable, UPARAM(ref)TArray<AActor*>& PlayerHandCards, bool& result, int TrampSuit)
 {
-	//result = PlayerHandCards.Contains(TEXT("Hello"))
+	
+	
 	for (AActor* Actor : PlayerHandCards)
 	{
 		
-		UE_LOG(LogTemp, Warning, TEXT("elem %s"), *Actor->GetName());
-		
+		//UE_LOG(LogTemp, Warning, TEXT("elem %f "), GetIntByString(Actor, "X", found));
+		UE_LOG(LogTemp, Warning, TEXT("elem %i "), GetIntByString(Actor, "X"));
 	}
 
 	
@@ -282,6 +283,31 @@ void UMyBlueprintFunctionLibrary::GetDebugSuitsAndValues(UPARAM(ref)TArray<int32
 	}
 	UE_LOG(LogTemp, Warning, TEXT(" : %s"), *result );
 	result.Empty();
+}
+
+/// <summary>
+/// //Функция получения значения переменной из экземпляра класса Blueprint
+/// </summary>
+/// <param name="object"> Экземпляр класса</param>
+/// <param name="VariableName">Имя переменной в классе BP</param>
+int UMyBlueprintFunctionLibrary::GetIntByString(UObject* object, FString VariableName)
+{
+	FName nameOfProperty = FName(*VariableName);
+	UClass* objectclass = object->GetClass();
+	FProperty* Property = objectclass->FindPropertyByName(nameOfProperty);
+
+	if (Property) {
+		FNumericProperty* NumericProperty = CastField<FNumericProperty>(Property);
+		if (NumericProperty) {
+			FIntProperty* IntProperty = CastField<FIntProperty>(NumericProperty);
+			if (IntProperty) {
+				void* ValuePtr = IntProperty->ContainerPtrToValuePtr<void>(object);
+				return NumericProperty->GetSignedIntPropertyValue(ValuePtr);
+			}
+		}
+	}
+
+	return 0;
 }
 
 
