@@ -18,13 +18,27 @@ class ASpawner;
 #define LogicGameGeom_TEST_Source_LogicGameGeom_GameLogic_h_13_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execValidateMove); \
-	DECLARE_FUNCTION(execGetDebugSuitsAndValues);
+	DECLARE_FUNCTION(execGetDebugSuitsAndValues); \
+	DECLARE_FUNCTION(execGetPowerHands); \
+	DECLARE_FUNCTION(execSortSuitsAndValues); \
+	DECLARE_FUNCTION(execGetCoordsUV); \
+	DECLARE_FUNCTION(execGetCardColumn); \
+	DECLARE_FUNCTION(execNormalization); \
+	DECLARE_FUNCTION(execGetCardsPlayer); \
+	DECLARE_FUNCTION(execGenerateDeck);
 
 
 #define LogicGameGeom_TEST_Source_LogicGameGeom_GameLogic_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execValidateMove); \
-	DECLARE_FUNCTION(execGetDebugSuitsAndValues);
+	DECLARE_FUNCTION(execGetDebugSuitsAndValues); \
+	DECLARE_FUNCTION(execGetPowerHands); \
+	DECLARE_FUNCTION(execSortSuitsAndValues); \
+	DECLARE_FUNCTION(execGetCoordsUV); \
+	DECLARE_FUNCTION(execGetCardColumn); \
+	DECLARE_FUNCTION(execNormalization); \
+	DECLARE_FUNCTION(execGetCardsPlayer); \
+	DECLARE_FUNCTION(execGenerateDeck);
 
 
 #define LogicGameGeom_TEST_Source_LogicGameGeom_GameLogic_h_13_INCLASS_NO_PURE_DECLS \
