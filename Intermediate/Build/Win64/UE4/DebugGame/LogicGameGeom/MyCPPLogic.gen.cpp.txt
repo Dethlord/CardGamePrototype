@@ -1,0 +1,5 @@
+C:\UnrealProject\LogicGameGeom TEST\Intermediate\Build\Win64\UE4\DebugGame\LogicGameGeom\Definitions.LogicGameGeom.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
+C:\Program Files\Epic Games\UE_4.26\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h
+C:\UnrealProject\LogicGameGeom TEST\Source\LogicGameGeom/MyCPPLogic.h
+C:\UnrealProject\LogicGameGeom TEST\Intermediate\Build\Win64\UE4\Inc\LogicGameGeom\MyCPPLogic.generated.h

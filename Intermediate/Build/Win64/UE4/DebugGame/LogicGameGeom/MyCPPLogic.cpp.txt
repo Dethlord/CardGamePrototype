@@ -1,0 +1,3 @@
+C:\UnrealProject\LogicGameGeom TEST\Intermediate\Build\Win64\UE4\DebugGame\LogicGameGeom\Definitions.LogicGameGeom.h
+C:\UnrealProject\LogicGameGeom TEST\Source\LogicGameGeom\MyCPPLogic.h
+C:\UnrealProject\LogicGameGeom TEST\Intermediate\Build\Win64\UE4\Inc\LogicGameGeom\MyCPPLogic.generated.h

@@ -1,0 +1,3 @@
+C:\UnrealProject\LogicGameGeom TEST\Intermediate\Build\Win64\UE4\Development\LogicGameGeom\Definitions.LogicGameGeom.h
+C:\UnrealProject\LogicGameGeom TEST\Source\LogicGameGeom\Spawner.h
+C:\UnrealProject\LogicGameGeom TEST\Intermediate\Build\Win64\UE4\Inc\LogicGameGeom\Spawner.generated.h

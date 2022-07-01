@@ -39,7 +39,9 @@ void AGameLogic::Normalization(UPARAM(ref)TArray<int32>& Array, TArray<int32>& G
 
 int AGameLogic::GetCardColumn(int Card)
 {
-	return 0;
+	return Card % 4;
+	//if (result == 0) { result = 4; }
+	
 }
 
 void AGameLogic::GetCoordsUV(int IDcard, float& Ucoords, float& Vcoords)
@@ -69,7 +71,91 @@ void AGameLogic::SortSuitsAndValues(int Player, UPARAM(ref)TArray<int32>& Player
 
 float AGameLogic::GetPowerHands(UPARAM(ref)TArray<int32>& Array)
 {
-	return 0.0f;
+	TArray<int32> tempArray;
+	TArray<int32> tempMainArray;
+	int sum(0); 
+	int maxsuits(0);
+	float maxresult(0);
+	float result;
+	bool bIsBreak(false);
+	for (int suits = 0; suits <= 3; suits++) {
+		tempMainArray.Empty(); sum = 0;// с новой масти обнуляем массив и сумму элементов
+		tempArray.Empty(); bIsBreak = false;
+		for (int32 element : Array) {
+			if (element % 4 == suits) tempMainArray.Add(element);
+		}
+
+		Normalization(tempMainArray, tempArray);//Приводим все позиции к ценности(52 карта->14 вес)
+
+		for (int32 element : tempArray) {//Обход фосок(не представляющих интерес)
+			if (element > 9) sum += element;
+		}
+
+		//UE_LOG(LogTemp, Warning, TEXT("SUM %i"), sum)
+			// Добавить KQB10 TQB10 QB109
+		switch (sum) {
+		case 50:result = 4.f; break;//TKQB
+		case 39:result = 3.f; break;//TKQ
+		case 38:result = 2.5; break;//TKB
+		case 27:result = 2;  break;	//TKx
+		case 26:result = 1.5; break;//TQx
+		case 25:result = 1.f; break;//KQx
+		case 24:result = 1.f; break;//T10x также срабатывает и на KBx
+		case 23:result = 0.5; break;//K10 так же срабатывает на QB
+		case 13:result = 0.5; break;//Kxx
+		case 14:result = 1.f; break;//Txx
+		case 33:result = 1.f; break;//QB10
+		case 34:result = 1.f; break;//KB10
+		case 35:result = 2.f; break;//KQ10 также срабатывает на TB10
+		case 36:result = 2.f; break;//KQB также срабатывает на TQ10
+		case 37:result = 2.5; break;//TQB перепроверить константу
+		default:result = 0; break;
+		}
+
+		//Разрешение конфликтов(TQB конфликтует с TK10)
+		if (tempArray.Num() > 1) {// для не допушения Assertion failed: (Index >= 0) & (Index < ArrayNum)
+			if (tempArray[0] == 14 && tempArray[1] == 13) {
+				if (tempArray.Num() > 2) {
+					if (tempArray[2] == 10) result = 2;
+				}
+
+			}
+		}
+
+		//Проверка на секвенции
+		if (tempArray.Num() > 4 && sum > 50) {
+			//if (tempArray[0] == 14 || tempArray[1] == 13){//только с туза или короля
+			result++;
+			
+			for (int index = 0; index < tempArray.Num() - 1; index++) {
+				if (!bIsBreak) {
+					if (tempArray[index] - tempArray[index + 1] == 1) {
+						result++;
+
+					}
+					else {
+						bIsBreak = true;
+						break;
+					}
+				}
+			}
+
+			//}
+		}
+		if (maxresult <= result) { maxresult = result; maxsuits = suits; }
+
+		switch (suits) {
+		case 0:UE_LOG(LogTemp, Warning, TEXT("♠ : %f,SUM %i"), result, sum); break;// Пики
+		case 1:UE_LOG(LogTemp, Warning, TEXT("♣ : %f,SUM %i"), result, sum); break;// Крести
+		case 2:UE_LOG(LogTemp, Warning, TEXT("♦ : %f,SUM %i"), result, sum); break;// Бубны
+		case 3:UE_LOG(LogTemp, Warning, TEXT("♥ : %f,SUM %i"), result, sum); break;// Чирвы	
+		default:result = 9999; break;
+		}
+
+
+	}
+	UE_LOG(LogTemp, Warning, TEXT("maxsuit  : %i,maxresult : %f"), maxsuits, maxresult);
+	return result;
 }
 
 FString AGameLogic::GetDebugSuitsAndValues(UPARAM(ref)TArray<int32>& Array)
@@ -109,11 +195,55 @@ FString AGameLogic::GetDebugSuitsAndValues(UPARAM(ref)TArray<int32>& Array)
 	return Result;
 }
 
-bool AGameLogic::ValidateMove(int Card, int CardOnTable, TArray<ASpawner*> PlayerHandCards, int TrampSuit)
+//bool AGameLogic::ValidateMove(int Card, int CardOnTable, TArray<AActor*> PlayerHandCards, int TrumpSuit)
+//{
+//	bool Result(false);
+//	for (AActor* Actor : PlayerHandCards) {
+//		UE_LOG(LogTemp, Warning, TEXT("elem %i"), Actor->IDcard);
+//
+//		/*CurValue = Actor->IDcard;
+//		if (GetCardColumn(CurValue)== GetCardColumn(CardOnTable))*/
+//	/*	{
+//			Result =false;
+//
+//		}
+//		else
+//		{
+//			Result= true;
+//		}
+//
+//	}*/*/
+//	return Result;
+//
+//}
+
+
+bool AGameLogic::ValidateMove(int Card, int CardOnTable, TArray<ASpawner*> PlayerHandCards, int TrumpSuit)
 {
-	for (ASpawner* Actor : PlayerHandCards) {
-		UE_LOG(LogTemp, Warning, TEXT("elem %i"), Actor->IDcard);
+	bool Result(false);
+
+	if (GetCardColumn(Card) == GetCardColumn(CardOnTable))
+	{
+		Result = true;
+
 	}
-		return false;
+	for (ASpawner* Actor : PlayerHandCards) {
+		UE_LOG(LogTemp, Warning, TEXT("elem %i "), Actor->IDcard);
+	}
+	return Result;
 }
+
+		//int32 CurValue(0);
+	/*	CurValue = Actor->IDcard;
+		if (GetCardColumn(CurValue)== GetCardColumn(CardOnTable))
+		{
+			Result =false;
+
+		}
+		else
+		{
+			Result= true;
+		}
+				*/
+
 

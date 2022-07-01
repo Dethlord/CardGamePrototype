@@ -35,7 +35,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 		static void Normalization(UPARAM(ref)TArray<int32>& Array, TArray<int32>& GeomsPlayerPow);
 
-	// в какой колонке  карта
+	// в какой колонке  карта	
 	UFUNCTION(BlueprintCallable)
 		static int GetCardColumn(int Card);
 
@@ -56,5 +56,5 @@ public:
 	//Функция разрешенности хода
 	
 	UFUNCTION(BlueprintCallable)
-		static bool ValidateMove(int Card, int CardOnTable, TArray<ASpawner*> PlayerHandCards, int TrampSuit = -1);
+		static bool ValidateMove(int Card, int CardOnTable, TArray<ASpawner*> PlayerHandCards, int TrumpSuit = -1);
 };
