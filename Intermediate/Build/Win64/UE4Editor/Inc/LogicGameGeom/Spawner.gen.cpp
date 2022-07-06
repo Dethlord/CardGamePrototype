@@ -40,6 +40,10 @@ void EmptyLinkFunctionForGeneratedCodeSpawner() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_IDcard_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FIntPropertyParams NewProp_IDcard;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_PowerCard_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FIntPropertyParams NewProp_PowerCard;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -74,9 +78,18 @@ void EmptyLinkFunctionForGeneratedCodeSpawner() {}
 	};
 #endif
 	const UE4CodeGen_Private::FIntPropertyParams Z_Construct_UClass_ASpawner_Statics::NewProp_IDcard = { "IDcard", nullptr, (EPropertyFlags)0x0011000000000004, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ASpawner, IDcard), METADATA_PARAMS(Z_Construct_UClass_ASpawner_Statics::NewProp_IDcard_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ASpawner_Statics::NewProp_IDcard_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASpawner_Statics::NewProp_PowerCard_MetaData[] = {
+		{ "Category", "Default" },
+		{ "ExposeOnSpawn", "true" },
+		{ "ModuleRelativePath", "Spawner.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FIntPropertyParams Z_Construct_UClass_ASpawner_Statics::NewProp_PowerCard = { "PowerCard", nullptr, (EPropertyFlags)0x0011000000000004, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ASpawner, PowerCard), METADATA_PARAMS(Z_Construct_UClass_ASpawner_Statics::NewProp_PowerCard_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ASpawner_Statics::NewProp_PowerCard_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ASpawner_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpawner_Statics::NewProp_bAlien,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpawner_Statics::NewProp_IDcard,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpawner_Statics::NewProp_PowerCard,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ASpawner_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ASpawner>::IsAbstract,
@@ -105,7 +118,7 @@ void EmptyLinkFunctionForGeneratedCodeSpawner() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ASpawner, 3158404040);
+	IMPLEMENT_CLASS(ASpawner, 3049552074);
 	template<> LOGICGAMEGEOM_API UClass* StaticClass<ASpawner>()
 	{
 		return ASpawner::StaticClass();

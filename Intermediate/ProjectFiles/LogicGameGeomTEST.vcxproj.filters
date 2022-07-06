@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\LogicGameGeomTEST.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{91391FC3-7CE2-4162-98CF-388B523C113D}</UniqueIdentifier>
+      <UniqueIdentifier>{F2C06EA2-9BB4-48C7-AE74-706314E74C0D}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\LogicGameGeom.Target.cs">
       <Filter>Source</Filter>
@@ -17,7 +17,7 @@
     <None Include="..\..\Help.txt" />
     <None Include="..\..\README.md" />
     <Filter Include="Config">
-      <UniqueIdentifier>{08D06ED5-E303-4E7B-81A4-9A625E060233}</UniqueIdentifier>
+      <UniqueIdentifier>{5AF6D6CE-1ADC-413B-9711-D2895FAC5715}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEngine.ini">
       <Filter>Config</Filter>
@@ -26,7 +26,7 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\LogicGameGeom">
-      <UniqueIdentifier>{F165E4BC-434D-4FE9-A735-6E2CB14AF5F2}</UniqueIdentifier>
+      <UniqueIdentifier>{5ED84B22-407E-4081-AC4B-0CB18F37BA19}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\LogicGameGeom\GameLogic.cpp">
       <Filter>Source\LogicGameGeom</Filter>
@@ -43,22 +43,10 @@
     <ClInclude Include="..\..\Source\LogicGameGeom\LogicGameGeom.h">
       <Filter>Source\LogicGameGeom</Filter>
     </ClInclude>
-    <ClCompile Include="..\..\Source\LogicGameGeom\MyBlueprintFunctionLibrary.cpp">
-      <Filter>Source\LogicGameGeom</Filter>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\LogicGameGeom\MyBlueprintFunctionLibrary.h">
-      <Filter>Source\LogicGameGeom</Filter>
-    </ClInclude>
     <ClCompile Include="..\..\Source\LogicGameGeom\MyClass.cpp">
       <Filter>Source\LogicGameGeom</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\LogicGameGeom\MyClass.h">
-      <Filter>Source\LogicGameGeom</Filter>
-    </ClInclude>
-    <ClCompile Include="..\..\Source\LogicGameGeom\MyCPPLogic.cpp">
-      <Filter>Source\LogicGameGeom</Filter>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\LogicGameGeom\MyCPPLogic.h">
       <Filter>Source\LogicGameGeom</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\LogicGameGeom\Spawner.cpp">

@@ -27,4 +27,6 @@ public:
 		bool bAlien;
 	UPROPERTY(BlueprintReadWrite, Category = "Default", meta = (ExposeOnSpawn = "true"))
 		int32 IDcard;
+	UPROPERTY(BlueprintReadWrite, Category = "Default", meta = (ExposeOnSpawn = "true"))
+		int32 PowerCard;
 };

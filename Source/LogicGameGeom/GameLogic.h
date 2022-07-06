@@ -25,15 +25,17 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	//Функция генерации случайной колоды
 	UFUNCTION(BlueprintCallable)
-		static void GenerateDeck(int Cards, TArray<int32>& Deck);
+	static TArray<int32> GenerateDeck(int Cards);
 	
+	
+
 	//Функция возврата всех карт на руках
 	UFUNCTION(BlueprintCallable)
-		static void GetCardsPlayer(int Player, UPARAM(ref)TArray<int32>& Array, TArray<int32>& PlayerDeck);
+		static TArray<int32> GetCardsPlayer(int Player, UPARAM(ref)TArray<int32>& Array);
 
 	//Фильтр нормализации значений карт(Порядковый номер в начальную стоимость)
 	UFUNCTION(BlueprintCallable)
-		static void Normalization(UPARAM(ref)TArray<int32>& Array, TArray<int32>& GeomsPlayerPow);
+		static TArray<int32> Normalization(UPARAM(ref)TArray<int32>& Array);
 
 	// в какой колонке  карта	
 	UFUNCTION(BlueprintCallable)
@@ -47,14 +49,26 @@ public:
 	UFUNCTION(BlueprintCallable)
 		static void SortSuitsAndValues(int Player, UPARAM(ref)TArray<int32>& PlayersDeck, TArray<int32>& PlayerHandCards);
 
-	//Функция отдачи "силы руки"
+	//Функция отдачи "силы руки"(общая оценка всей "руки" требуемая для торговли)
 	UFUNCTION(BlueprintCallable)
 		static float GetPowerHands(UPARAM(ref)TArray<int32>& Array);
 	//Функция для логирования значений и мастей в консоль
 	UFUNCTION(BlueprintCallable)
 		static FString GetDebugSuitsAndValues(UPARAM(ref)TArray<int32>& Array);
+
 	//Функция разрешенности хода
-	
 	UFUNCTION(BlueprintCallable)
 		static bool ValidateMove(int Card, int CardOnTable, TArray<ASpawner*> PlayerHandCards, int TrumpSuit = -1);
+	//Функция поиска наилучшего хода
+	UFUNCTION(BlueprintCallable)
+		static int FindMove(TArray<ASpawner*> PlayerHandCards, TArray<ASpawner*> CardTableArray);
+	//Функция отдачи силы карты( зависит от масти или от бескозырного режима)
+	UFUNCTION(BlueprintCallable)
+	static int GetPowerCard(int Card, int TrumpSuit);
+
+private:
+	//Функция нормализации значения карты(Порядковый номер в начальную стоимость)
+	static int NormCard(int Card);
+
+
 };

@@ -25,32 +25,93 @@ void AGameLogic::Tick(float DeltaTime)
 
 }
 
-void AGameLogic::GenerateDeck(int Cards, TArray<int32>& Deck)
+TArray<int32> AGameLogic::GenerateDeck(int Cards)
 {
+	int32 debug(true);
+	TArray<int32> Deck;
+		
+		for (int32 card = 1; card <= Cards; card++) { Deck.Add(card); }
+		
+		if (debug) {
+			for (int32 element : Deck)	{
+				//UE_LOG(test3, Warning, TEXT("elem %i"), element);
+				
+			}
+		}
+
+	return Deck;
 }
 
-void AGameLogic::GetCardsPlayer(int Player, UPARAM(ref)TArray<int32>& Array, TArray<int32>& PlayerDeck)
+TArray<int32> AGameLogic::GetCardsPlayer(int Player, UPARAM(ref)TArray<int32>& Array)
+
 {
+	int32 debug(false);
+	TArray<int32> PlayerDeck;
+		
+	for (int32 card = Player; card < Array.Num(); card+=4){
+		 PlayerDeck.Add(Array[card]);
+	}
+	
+	if (debug){
+		for (int32 element : PlayerDeck)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("elem %i"), element);
+		}
+	}
+	return PlayerDeck;
 }
 
-void AGameLogic::Normalization(UPARAM(ref)TArray<int32>& Array, TArray<int32>& GeomsPlayerPow)
+TArray<int32> AGameLogic::Normalization(UPARAM(ref)TArray<int32>& Array)
 {
+	int32 debug(false);
+	TArray<int32> PlayerPow;
+	for (int32 element : Array) {
+		
+		PlayerPow.Add(NormCard(element));
+		//if (element >= 49) { PlayerPow.Add(14); }//Туз
+		//else if (element >= 45) {PlayerPow.Add(13); }//Король
+		//else if (element >= 41) { PlayerPow.Add(12); }//Дама
+		//else if (element >= 37) { PlayerPow.Add(11); }//Валет
+		//else if (element >= 33) { PlayerPow.Add(10); }
+		//else if (element >= 29) { PlayerPow.Add(9); }
+		//else if (element >= 25) { PlayerPow.Add(8); }
+		//else if (element >= 21) { PlayerPow.Add(7); }
+		//else if (element >= 17) { PlayerPow.Add(6); }
+		//else if (element >= 13) { PlayerPow.Add(5); }
+		//else if (element >= 9) { PlayerPow.Add(4); }
+		//else if (element >= 5) { PlayerPow.Add(3); }
+		//else if (element <= 4) { PlayerPow.Add(2); }
+	}
+
+	if (debug) {
+		for (int32 element : PlayerPow) {
+			UE_LOG(LogTemp, Warning, TEXT("elem %i"), element);
+		}
+	}
+	
+	return PlayerPow;
 }
 
 int AGameLogic::GetCardColumn(int Card)
 {
 	return Card % 4;
 	//if (result == 0) { result = 4; }
-	
 }
 
 void AGameLogic::GetCoordsUV(int IDcard, float& Ucoords, float& Vcoords)
 {
+		int32 debug(false);
+		const int MaxRows(4);
+		IDcard--;
+		Ucoords = IDcard / MaxRows;
+		Vcoords = IDcard % MaxRows;
+		if (debug) {UE_LOG(LogTemp, Warning, TEXT("UV: %f,%f"), Ucoords, Vcoords); }
+
 }
 
 void AGameLogic::SortSuitsAndValues(int Player, UPARAM(ref)TArray<int32>& PlayersDeck, TArray<int32>& PlayerHandCards)
 {
-	//0-Пики 1-Крести 2-Бубны 3-Чирвы
+	//0-Чирвы 1-Пики 2-Крести 3-Бубны
 	int32 Temp;
 	TArray<int32> TempArray;
 
@@ -85,7 +146,7 @@ float AGameLogic::GetPowerHands(UPARAM(ref)TArray<int32>& Array)
 			if (element % 4 == suits) tempMainArray.Add(element);
 		}
 
-		Normalization(tempMainArray, tempArray);//Приводим все позиции к ценности(52 карта->14 вес)
+		tempArray = Normalization(tempMainArray);//Приводим все позиции к ценности(52 карта->14 вес)
 
 		for (int32 element : tempArray) {//Обход фосок(не представляющих интерес)
 			if (element > 9) sum += element;
@@ -151,8 +212,6 @@ float AGameLogic::GetPowerHands(UPARAM(ref)TArray<int32>& Array)
 		case 3:UE_LOG(LogTemp, Warning, TEXT("♥ : %f,SUM %i"), result, sum); break;// Чирвы	
 		default:result = 9999; break;
 		}
-
-
 	}
 	UE_LOG(LogTemp, Warning, TEXT("maxsuit  : %i,maxresult : %f"), maxsuits, maxresult);
 	return result;
@@ -195,55 +254,102 @@ FString AGameLogic::GetDebugSuitsAndValues(UPARAM(ref)TArray<int32>& Array)
 	return Result;
 }
 
-//bool AGameLogic::ValidateMove(int Card, int CardOnTable, TArray<AActor*> PlayerHandCards, int TrumpSuit)
-//{
-//	bool Result(false);
-//	for (AActor* Actor : PlayerHandCards) {
-//		UE_LOG(LogTemp, Warning, TEXT("elem %i"), Actor->IDcard);
-//
-//		/*CurValue = Actor->IDcard;
-//		if (GetCardColumn(CurValue)== GetCardColumn(CardOnTable))*/
-//	/*	{
-//			Result =false;
-//
-//		}
-//		else
-//		{
-//			Result= true;
-//		}
-//
-//	}*/*/
-//	return Result;
-//
-//}
-
-
 bool AGameLogic::ValidateMove(int Card, int CardOnTable, TArray<ASpawner*> PlayerHandCards, int TrumpSuit)
 {
+	bool debag(false);
 	bool Result(false);
+	bool Bin(false);
+	int cardCol;
+	int cardOnTableCol;
+	int CurIDonHands;
+	cardCol = GetCardColumn(Card);
 
-	if (GetCardColumn(Card) == GetCardColumn(CardOnTable))
-	{
-		Result = true;
+	cardOnTableCol = GetCardColumn(CardOnTable);
 
-	}
 	for (ASpawner* Actor : PlayerHandCards) {
-		UE_LOG(LogTemp, Warning, TEXT("elem %i "), Actor->IDcard);
-	}
+		if (IsValid(Actor)){
+			CurIDonHands = Actor->IDcard;
+		   if (GetCardColumn(CurIDonHands) == cardOnTableCol){
+		   	Bin = true;
+			 break;
+		   }
+		if (Bin == true) break;
+	    }
+    }
+	if (Bin == false) Result = true;
+	
+	if (GetCardColumn(Card) == GetCardColumn(CardOnTable)) Result = true;
+
+	if (debag){
+		for (ASpawner* Actor : PlayerHandCards) {
+			if (IsValid(Actor))	{
+			    UE_LOG(LogTemp, Warning, TEXT("elem %i "), Actor->IDcard);
+			}
+		}
+    }
 	return Result;
 }
 
-		//int32 CurValue(0);
-	/*	CurValue = Actor->IDcard;
-		if (GetCardColumn(CurValue)== GetCardColumn(CardOnTable))
-		{
-			Result =false;
+int AGameLogic::FindMove(TArray<ASpawner*> PlayerHandCards, TArray<ASpawner*> CardTableArray)
+{
+	return 0;
+}
 
-		}
-		else
-		{
-			Result= true;
-		}
-				*/
+int AGameLogic::GetPowerCard(int Card, int TrumpSuit)
+{
+	
+	int CardNormalize(0);
+	int Power(0);
+	CardNormalize = NormCard(Card);
+	if (GetCardColumn(Card) == TrumpSuit)
+	 {
+	    Power = CardNormalize + 100;	
+	 }
+	else
+	 {
+		Power = CardNormalize;
+	 }
+	
+	UE_LOG(LogTemp, Warning, TEXT("elem %i "), Power);
+	return Power;
+}
 
 
+
+//int AGameLogic::GetPowerCard(i, int TrumpSuit)
+//{
+//	UE_LOG(LogTemp, Warning, TEXT("elem %i "), PlayerHandCards[0]->IDcard); 
+//	//for (ASpawner* Actor : PlayerHandCards) {
+//	//	
+//	//	if (IsValid(Actor)) {
+//
+//	//		//	CurIDonHands = Actor->IDcard;
+//
+//
+//	//		return 0;
+//	//	}
+//
+//	//}
+//	return 0;
+//}
+
+int AGameLogic::NormCard(int Card)
+{
+			if (Card >= 49) { return 14; }//Туз
+		else if (Card >= 45) { return 13; }//Король
+		else if (Card >= 41) { return 12; }//Дама
+		else if (Card >= 37) { return 11; }//Валет
+		else if (Card >= 33) { return 10; }
+		else if (Card >= 29) { return 9; }
+		else if (Card >= 25) { return 8; }
+		else if (Card >= 21) { return 7; }
+		else if (Card >= 17) { return 6; }
+		else if (Card >= 13) { return 5; }
+		else if (Card >= 9) { return 4; }
+		else if (Card >= 5) { return 3; }
+		else if (Card <= 4) { return 2; }
+		return 0;
+
+}
+
+		
