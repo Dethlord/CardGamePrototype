@@ -19,6 +19,7 @@ class ASpawner;
  \
 	DECLARE_FUNCTION(execGetPowerCard); \
 	DECLARE_FUNCTION(execFindMove); \
+	DECLARE_FUNCTION(execIsEqualColumns); \
 	DECLARE_FUNCTION(execValidateMove); \
 	DECLARE_FUNCTION(execGetDebugSuitsAndValues); \
 	DECLARE_FUNCTION(execGetPowerHands); \
@@ -34,6 +35,7 @@ class ASpawner;
  \
 	DECLARE_FUNCTION(execGetPowerCard); \
 	DECLARE_FUNCTION(execFindMove); \
+	DECLARE_FUNCTION(execIsEqualColumns); \
 	DECLARE_FUNCTION(execValidateMove); \
 	DECLARE_FUNCTION(execGetDebugSuitsAndValues); \
 	DECLARE_FUNCTION(execGetPowerHands); \

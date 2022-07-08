@@ -98,7 +98,7 @@ int AGameLogic::GetCardColumn(int Card)
 	result = Card % 4;
       if (result == 0) { result = 4; }
 	return  result - 1;
-	
+	bool Condition =true;
 }
 
 void AGameLogic::GetCoordsUV(int IDcard, float& Ucoords, float& Vcoords)
@@ -206,6 +206,7 @@ float AGameLogic::GetPowerHands(UPARAM(ref)TArray<int32>& Array)
 			}
 						
 		}
+	
 		if (maxresult <= result) { maxresult = result; maxsuits = suits; }
 
 		switch (suits) {
@@ -293,6 +294,11 @@ bool AGameLogic::ValidateMove(int Card, int CardOnTable, TArray<ASpawner*> Playe
 	return Result;
 }
 
+bool AGameLogic::IsEqualColumns(int Card, int CardOnTable)
+{
+	return GetCardColumn(Card) == GetCardColumn(CardOnTable);
+}
+
 int AGameLogic::FindMove(TArray<ASpawner*> PlayerHandCards, TArray<ASpawner*> CardTableArray)
 {
 	return 0;
@@ -352,6 +358,8 @@ int AGameLogic::NormCard(int Card)
 		else if (Card >= 5) { return 3; }
 		else if (Card <= 4) { return 2; }
 		return 0;
+
+
 
 }
 

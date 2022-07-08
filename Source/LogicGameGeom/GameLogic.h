@@ -59,6 +59,10 @@ public:
 	//Функция разрешенности хода
 	UFUNCTION(BlueprintCallable)
 		static bool ValidateMove(int Card, int CardOnTable, TArray<ASpawner*> PlayerHandCards, int TrumpSuit = -1);
+
+	UFUNCTION(BlueprintCallable)
+		static bool IsEqualColumns(int Card, int CardOnTable);
+
 	//Функция поиска наилучшего хода
 	UFUNCTION(BlueprintCallable)
 		static int FindMove(TArray<ASpawner*> PlayerHandCards, TArray<ASpawner*> CardTableArray);
