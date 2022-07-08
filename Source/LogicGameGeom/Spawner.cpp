@@ -15,7 +15,7 @@ ASpawner::ASpawner()
 void ASpawner::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	//UE_LOG(LogTemp, Warning, TEXT("ID FROM C++: %i"), IDcard)
 }
 
 // Called every frame

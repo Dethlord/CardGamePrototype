@@ -94,8 +94,11 @@ TArray<int32> AGameLogic::Normalization(UPARAM(ref)TArray<int32>& Array)
 
 int AGameLogic::GetCardColumn(int Card)
 {
-	return Card % 4;
-	//if (result == 0) { result = 4; }
+	int result;
+	result = Card % 4;
+      if (result == 0) { result = 4; }
+	return  result - 1;
+	
 }
 
 void AGameLogic::GetCoordsUV(int IDcard, float& Ucoords, float& Vcoords)
@@ -120,8 +123,8 @@ void AGameLogic::SortSuitsAndValues(int Player, UPARAM(ref)TArray<int32>& Player
 		TempArray.Empty();
 		for (int32 element : PlayersDeck)
 		{
-			Temp = element % 4;
-			//if (temp == 0) temp = 4;
+			Temp = (element-1) % 4;// todo
+			
 			if (Temp == Suits) TempArray.Add(element);
 		}
 		TempArray.Sort();
@@ -143,7 +146,7 @@ float AGameLogic::GetPowerHands(UPARAM(ref)TArray<int32>& Array)
 		tempMainArray.Empty(); sum = 0;// с новой масти обнуляем массив и сумму элементов
 		tempArray.Empty(); bIsBreak = false;
 		for (int32 element : Array) {
-			if (element % 4 == suits) tempMainArray.Add(element);
+			if ((element-1) % 4 == suits) tempMainArray.Add(element);//todo
 		}
 
 		tempArray = Normalization(tempMainArray);//Приводим все позиции к ценности(52 карта->14 вес)
@@ -156,6 +159,7 @@ float AGameLogic::GetPowerHands(UPARAM(ref)TArray<int32>& Array)
 			// Добавить KQB10 TQB10 QB109
 		switch (sum) {
 		case 50:result = 4.f; break;//TKQB
+		case 46:result = 3.f; break;//KQB10/Перерепроверить константу
 		case 39:result = 3.f; break;//TKQ
 		case 38:result = 2.5; break;//TKB
 		case 27:result = 2;  break;	//TKx
@@ -169,7 +173,7 @@ float AGameLogic::GetPowerHands(UPARAM(ref)TArray<int32>& Array)
 		case 34:result = 1.f; break;//KB10
 		case 35:result = 2.f; break;//KQ10 также срабатывает на TB10
 		case 36:result = 2.f; break;//KQB также срабатывает на TQ10
-		case 37:result = 2.5; break;//TQB перепроверить константу
+		case 37:result = 2.5; break;//TQB перепроверить константу(по инфе было 2.5)
 		default:result = 0; break;
 		}
 
@@ -185,7 +189,7 @@ float AGameLogic::GetPowerHands(UPARAM(ref)TArray<int32>& Array)
 
 		//Проверка на секвенции
 		if (tempArray.Num() > 4 && sum > 50) {
-			//if (tempArray[0] == 14 || tempArray[1] == 13){//только с туза или короля
+		
 			result++;
 			
 			for (int index = 0; index < tempArray.Num() - 1; index++) {
@@ -200,8 +204,7 @@ float AGameLogic::GetPowerHands(UPARAM(ref)TArray<int32>& Array)
 					}
 				}
 			}
-
-			//}
+						
 		}
 		if (maxresult <= result) { maxresult = result; maxsuits = suits; }
 
@@ -240,11 +243,11 @@ FString AGameLogic::GetDebugSuitsAndValues(UPARAM(ref)TArray<int32>& Array)
 
 		Result += value;
 
-		switch (element % 4) {
-		case 0:Suit = TEXT("♥"); break;
-		case 1:Suit = TEXT("♠"); break;
-		case 2:Suit = TEXT("♣"); break;
-		case 3:Suit = TEXT("♦"); break;
+		switch ((element-1) % 4) {
+		case 0:Suit = TEXT("♠"); break;
+		case 1:Suit = TEXT("♣"); break;
+		case 2:Suit = TEXT("♦"); break;
+		case 3:Suit = TEXT("♥"); break;
 		default:Result = "999"; break;
 		}
 
@@ -256,7 +259,7 @@ FString AGameLogic::GetDebugSuitsAndValues(UPARAM(ref)TArray<int32>& Array)
 
 bool AGameLogic::ValidateMove(int Card, int CardOnTable, TArray<ASpawner*> PlayerHandCards, int TrumpSuit)
 {
-	bool debag(false);
+	bool debug(false);
 	bool Result(false);
 	bool Bin(false);
 	int cardCol;
@@ -280,7 +283,7 @@ bool AGameLogic::ValidateMove(int Card, int CardOnTable, TArray<ASpawner*> Playe
 	
 	if (GetCardColumn(Card) == GetCardColumn(CardOnTable)) Result = true;
 
-	if (debag){
+	if (debug){
 		for (ASpawner* Actor : PlayerHandCards) {
 			if (IsValid(Actor))	{
 			    UE_LOG(LogTemp, Warning, TEXT("elem %i "), Actor->IDcard);
@@ -297,7 +300,7 @@ int AGameLogic::FindMove(TArray<ASpawner*> PlayerHandCards, TArray<ASpawner*> Ca
 
 int AGameLogic::GetPowerCard(int Card, int TrumpSuit)
 {
-	
+	bool debug(true);
 	int CardNormalize(0);
 	int Power(0);
 	CardNormalize = NormCard(Card);
@@ -309,8 +312,8 @@ int AGameLogic::GetPowerCard(int Card, int TrumpSuit)
 	 {
 		Power = CardNormalize;
 	 }
+	if (debug) UE_LOG(LogTemp, Warning, TEXT("elem %i "), Power);
 	
-	UE_LOG(LogTemp, Warning, TEXT("elem %i "), Power);
 	return Power;
 }
 
