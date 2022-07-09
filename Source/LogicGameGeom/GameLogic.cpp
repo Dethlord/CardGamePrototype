@@ -329,7 +329,7 @@ int AGameLogic::GetRoundWinner(TArray<ASpawner*> CardTableArray, int FirstMovePl
 	int MaxIndex(0);
 	int Result(0);
 	
-	for (int index = 0; index < CardTableArray.Num() - 1; index++)
+	for (int index = 0; index <= 3; index++)
 	{
 		if  (CardTableArray[index]->PowerCard > MaxValue) {
 			MaxValue = CardTableArray[index]->PowerCard;
