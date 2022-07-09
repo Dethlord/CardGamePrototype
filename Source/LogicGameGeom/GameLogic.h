@@ -70,6 +70,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	static int GetPowerCard(int Card, int TrumpSuit);
 
+	UFUNCTION(BlueprintCallable)
+		static int GetRoundWinner(TArray<ASpawner*> CardTableArray, int FirstMovePlayer);
 private:
 	//Функция нормализации значения карты(Порядковый номер в начальную стоимость)
 	static int NormCard(int Card);

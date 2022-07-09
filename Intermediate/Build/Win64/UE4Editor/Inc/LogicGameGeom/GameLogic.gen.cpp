@@ -19,6 +19,15 @@ void EmptyLinkFunctionForGeneratedCodeGameLogic() {}
 	UPackage* Z_Construct_UPackage__Script_LogicGameGeom();
 	LOGICGAMEGEOM_API UClass* Z_Construct_UClass_ASpawner_NoRegister();
 // End Cross Module References
+	DEFINE_FUNCTION(AGameLogic::execGetRoundWinner)
+	{
+		P_GET_TARRAY(ASpawner*,Z_Param_CardTableArray);
+		P_GET_PROPERTY(FIntProperty,Z_Param_FirstMovePlayer);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(int32*)Z_Param__Result=AGameLogic::GetRoundWinner(Z_Param_CardTableArray,Z_Param_FirstMovePlayer);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AGameLogic::execGetPowerCard)
 	{
 		P_GET_PROPERTY(FIntProperty,Z_Param_Card);
@@ -138,6 +147,7 @@ void EmptyLinkFunctionForGeneratedCodeGameLogic() {}
 			{ "GetDebugSuitsAndValues", &AGameLogic::execGetDebugSuitsAndValues },
 			{ "GetPowerCard", &AGameLogic::execGetPowerCard },
 			{ "GetPowerHands", &AGameLogic::execGetPowerHands },
+			{ "GetRoundWinner", &AGameLogic::execGetRoundWinner },
 			{ "IsEqualColumns", &AGameLogic::execIsEqualColumns },
 			{ "Normalization", &AGameLogic::execNormalization },
 			{ "SortSuitsAndValues", &AGameLogic::execSortSuitsAndValues },
@@ -479,6 +489,49 @@ void EmptyLinkFunctionForGeneratedCodeGameLogic() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_AGameLogic_GetRoundWinner_Statics
+	{
+		struct GameLogic_eventGetRoundWinner_Parms
+		{
+			TArray<ASpawner*> CardTableArray;
+			int32 FirstMovePlayer;
+			int32 ReturnValue;
+		};
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_CardTableArray_Inner;
+		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_CardTableArray;
+		static const UE4CodeGen_Private::FUnsizedIntPropertyParams NewProp_FirstMovePlayer;
+		static const UE4CodeGen_Private::FUnsizedIntPropertyParams NewProp_ReturnValue;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AGameLogic_GetRoundWinner_Statics::NewProp_CardTableArray_Inner = { "CardTableArray", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_ASpawner_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_AGameLogic_GetRoundWinner_Statics::NewProp_CardTableArray = { "CardTableArray", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(GameLogic_eventGetRoundWinner_Parms, CardTableArray), EArrayPropertyFlags::None, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_AGameLogic_GetRoundWinner_Statics::NewProp_FirstMovePlayer = { "FirstMovePlayer", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(GameLogic_eventGetRoundWinner_Parms, FirstMovePlayer), METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_AGameLogic_GetRoundWinner_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(GameLogic_eventGetRoundWinner_Parms, ReturnValue), METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AGameLogic_GetRoundWinner_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AGameLogic_GetRoundWinner_Statics::NewProp_CardTableArray_Inner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AGameLogic_GetRoundWinner_Statics::NewProp_CardTableArray,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AGameLogic_GetRoundWinner_Statics::NewProp_FirstMovePlayer,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AGameLogic_GetRoundWinner_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AGameLogic_GetRoundWinner_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "GameLogic.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_AGameLogic_GetRoundWinner_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AGameLogic, nullptr, "GetRoundWinner", nullptr, nullptr, sizeof(GameLogic_eventGetRoundWinner_Parms), Z_Construct_UFunction_AGameLogic_GetRoundWinner_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AGameLogic_GetRoundWinner_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04022401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AGameLogic_GetRoundWinner_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AGameLogic_GetRoundWinner_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AGameLogic_GetRoundWinner()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_AGameLogic_GetRoundWinner_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_AGameLogic_IsEqualColumns_Statics
 	{
 		struct GameLogic_eventIsEqualColumns_Parms
@@ -699,6 +752,7 @@ void EmptyLinkFunctionForGeneratedCodeGameLogic() {}
 		{ &Z_Construct_UFunction_AGameLogic_GetDebugSuitsAndValues, "GetDebugSuitsAndValues" }, // 2497387767
 		{ &Z_Construct_UFunction_AGameLogic_GetPowerCard, "GetPowerCard" }, // 1324700003
 		{ &Z_Construct_UFunction_AGameLogic_GetPowerHands, "GetPowerHands" }, // 3672621020
+		{ &Z_Construct_UFunction_AGameLogic_GetRoundWinner, "GetRoundWinner" }, // 2469596556
 		{ &Z_Construct_UFunction_AGameLogic_IsEqualColumns, "IsEqualColumns" }, // 178279206
 		{ &Z_Construct_UFunction_AGameLogic_Normalization, "Normalization" }, // 3677418741
 		{ &Z_Construct_UFunction_AGameLogic_SortSuitsAndValues, "SortSuitsAndValues" }, // 2543705984
@@ -737,7 +791,7 @@ void EmptyLinkFunctionForGeneratedCodeGameLogic() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AGameLogic, 3271037246);
+	IMPLEMENT_CLASS(AGameLogic, 1226376846);
 	template<> LOGICGAMEGEOM_API UClass* StaticClass<AGameLogic>()
 	{
 		return AGameLogic::StaticClass();

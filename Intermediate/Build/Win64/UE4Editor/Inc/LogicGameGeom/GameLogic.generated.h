@@ -17,6 +17,7 @@ class ASpawner;
 #define LogicGameGeom_TEST_Source_LogicGameGeom_GameLogic_h_13_SPARSE_DATA
 #define LogicGameGeom_TEST_Source_LogicGameGeom_GameLogic_h_13_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execGetRoundWinner); \
 	DECLARE_FUNCTION(execGetPowerCard); \
 	DECLARE_FUNCTION(execFindMove); \
 	DECLARE_FUNCTION(execIsEqualColumns); \
@@ -33,6 +34,7 @@ class ASpawner;
 
 #define LogicGameGeom_TEST_Source_LogicGameGeom_GameLogic_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execGetRoundWinner); \
 	DECLARE_FUNCTION(execGetPowerCard); \
 	DECLARE_FUNCTION(execFindMove); \
 	DECLARE_FUNCTION(execIsEqualColumns); \

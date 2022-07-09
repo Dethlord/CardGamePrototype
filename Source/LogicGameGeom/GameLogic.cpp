@@ -323,6 +323,42 @@ int AGameLogic::GetPowerCard(int Card, int TrumpSuit)
 	return Power;
 }
 
+int AGameLogic::GetRoundWinner(TArray<ASpawner*> CardTableArray, int FirstMovePlayer)
+{
+	int MaxValue(0);
+	int MaxIndex(0);
+	int Result(0);
+	
+	for (int index = 0; index < CardTableArray.Num() - 1; index++)
+	{
+		if  (CardTableArray[index]->PowerCard > MaxValue) {
+			MaxValue = CardTableArray[index]->PowerCard;
+			MaxIndex = index;
+		}
+
+	}
+	
+	switch (FirstMovePlayer)
+	{
+	case 0:	Result = MaxIndex;break;
+	case 1:
+		if (MaxIndex == 3) { Result = 0; }
+		else { Result = MaxIndex + 1;}break;
+	case 2:
+		if ((MaxIndex == 2) || (MaxIndex == 3)) { Result = MaxIndex - 2; }
+		else { Result = MaxIndex + 2;}break;
+	case 3:
+		if ((MaxIndex == 2) || (MaxIndex == 3)) { Result = MaxIndex - 1; }
+		else
+		{
+			if (MaxIndex == 0) Result = 3;
+			if (MaxIndex == 1) Result = 0;
+		}
+		break; 
+	}
+	return Result;
+}
+
 
 
 //int AGameLogic::GetPowerCard(i, int TrumpSuit)
