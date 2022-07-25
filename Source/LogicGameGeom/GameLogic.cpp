@@ -10,7 +10,7 @@ AGameLogic::AGameLogic()
 	PrimaryActorTick.bCanEverTick = true;
 
 }
-ы
+
 // Called when the game starts or when spawned
 void AGameLogic::BeginPlay()
 {
@@ -65,23 +65,7 @@ TArray<int32> AGameLogic::Normalization(UPARAM(ref)TArray<int32>& Array)
 {
 	int32 debug(false);
 	TArray<int32> PlayerPow;
-	for (int32 element : Array) {
-		
-		PlayerPow.Add(NormCard(element));
-		//if (element >= 49) { PlayerPow.Add(14); }//Туз
-		//else if (element >= 45) {PlayerPow.Add(13); }//Король
-		//else if (element >= 41) { PlayerPow.Add(12); }//Дама
-		//else if (element >= 37) { PlayerPow.Add(11); }//Валет
-		//else if (element >= 33) { PlayerPow.Add(10); }
-		//else if (element >= 29) { PlayerPow.Add(9); }
-		//else if (element >= 25) { PlayerPow.Add(8); }
-		//else if (element >= 21) { PlayerPow.Add(7); }
-		//else if (element >= 17) { PlayerPow.Add(6); }
-		//else if (element >= 13) { PlayerPow.Add(5); }
-		//else if (element >= 9) { PlayerPow.Add(4); }
-		//else if (element >= 5) { PlayerPow.Add(3); }
-		//else if (element <= 4) { PlayerPow.Add(2); }
-	}
+	for (int32 element : Array) {PlayerPow.Add(NormCard(element));}
 
 	if (debug) {
 		for (int32 element : PlayerPow) {
