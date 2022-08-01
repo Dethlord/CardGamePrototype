@@ -41,9 +41,10 @@ void EmptyLinkFunctionForGeneratedCodeGameLogic() {}
 	{
 		P_GET_TARRAY(ASpawner*,Z_Param_PlayerHandCards);
 		P_GET_TARRAY(ASpawner*,Z_Param_CardTableArray);
+		P_GET_TARRAY(ASpawner*,Z_Param_CardsReleased);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		*(int32*)Z_Param__Result=AGameLogic::FindMove(Z_Param_PlayerHandCards,Z_Param_CardTableArray);
+		*(ASpawner**)Z_Param__Result=AGameLogic::FindMove(Z_Param_PlayerHandCards,Z_Param_CardTableArray,Z_Param_CardsReleased);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AGameLogic::execIsEqualColumns)
@@ -161,13 +162,16 @@ void EmptyLinkFunctionForGeneratedCodeGameLogic() {}
 		{
 			TArray<ASpawner*> PlayerHandCards;
 			TArray<ASpawner*> CardTableArray;
-			int32 ReturnValue;
+			TArray<ASpawner*> CardsReleased;
+			ASpawner* ReturnValue;
 		};
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_PlayerHandCards_Inner;
 		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_PlayerHandCards;
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_CardTableArray_Inner;
 		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_CardTableArray;
-		static const UE4CodeGen_Private::FUnsizedIntPropertyParams NewProp_ReturnValue;
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_CardsReleased_Inner;
+		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_CardsReleased;
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_ReturnValue;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
@@ -178,17 +182,21 @@ void EmptyLinkFunctionForGeneratedCodeGameLogic() {}
 	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_AGameLogic_FindMove_Statics::NewProp_PlayerHandCards = { "PlayerHandCards", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(GameLogic_eventFindMove_Parms, PlayerHandCards), EArrayPropertyFlags::None, METADATA_PARAMS(nullptr, 0) };
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AGameLogic_FindMove_Statics::NewProp_CardTableArray_Inner = { "CardTableArray", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_ASpawner_NoRegister, METADATA_PARAMS(nullptr, 0) };
 	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_AGameLogic_FindMove_Statics::NewProp_CardTableArray = { "CardTableArray", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(GameLogic_eventFindMove_Parms, CardTableArray), EArrayPropertyFlags::None, METADATA_PARAMS(nullptr, 0) };
-	const UE4CodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UFunction_AGameLogic_FindMove_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(GameLogic_eventFindMove_Parms, ReturnValue), METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AGameLogic_FindMove_Statics::NewProp_CardsReleased_Inner = { "CardsReleased", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_ASpawner_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_AGameLogic_FindMove_Statics::NewProp_CardsReleased = { "CardsReleased", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(GameLogic_eventFindMove_Parms, CardsReleased), EArrayPropertyFlags::None, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AGameLogic_FindMove_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(GameLogic_eventFindMove_Parms, ReturnValue), Z_Construct_UClass_ASpawner_NoRegister, METADATA_PARAMS(nullptr, 0) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AGameLogic_FindMove_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AGameLogic_FindMove_Statics::NewProp_PlayerHandCards_Inner,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AGameLogic_FindMove_Statics::NewProp_PlayerHandCards,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AGameLogic_FindMove_Statics::NewProp_CardTableArray_Inner,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AGameLogic_FindMove_Statics::NewProp_CardTableArray,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AGameLogic_FindMove_Statics::NewProp_CardsReleased_Inner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AGameLogic_FindMove_Statics::NewProp_CardsReleased,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AGameLogic_FindMove_Statics::NewProp_ReturnValue,
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AGameLogic_FindMove_Statics::Function_MetaDataParams[] = {
-		{ "Comment", "//??????? ?????? ?????????? ????\n" },
+		{ "Comment", "////??????? ?????? ?????????? ????\n" },
 		{ "ModuleRelativePath", "GameLogic.h" },
 	};
 #endif
@@ -564,6 +572,7 @@ void EmptyLinkFunctionForGeneratedCodeGameLogic() {}
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AGameLogic_IsEqualColumns_Statics::Function_MetaDataParams[] = {
+		{ "Comment", "// ??????? ?????? ???????(???????? ?? ?????????? ????? ???????????? ????? ?? ?????)\n" },
 		{ "ModuleRelativePath", "GameLogic.h" },
 	};
 #endif
@@ -744,7 +753,7 @@ void EmptyLinkFunctionForGeneratedCodeGameLogic() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_LogicGameGeom,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_AGameLogic_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_AGameLogic_FindMove, "FindMove" }, // 60058109
+		{ &Z_Construct_UFunction_AGameLogic_FindMove, "FindMove" }, // 4220570455
 		{ &Z_Construct_UFunction_AGameLogic_GenerateDeck, "GenerateDeck" }, // 2394952037
 		{ &Z_Construct_UFunction_AGameLogic_GetCardColumn, "GetCardColumn" }, // 3477245399
 		{ &Z_Construct_UFunction_AGameLogic_GetCardsPlayer, "GetCardsPlayer" }, // 3150802404
@@ -753,7 +762,7 @@ void EmptyLinkFunctionForGeneratedCodeGameLogic() {}
 		{ &Z_Construct_UFunction_AGameLogic_GetPowerCard, "GetPowerCard" }, // 1324700003
 		{ &Z_Construct_UFunction_AGameLogic_GetPowerHands, "GetPowerHands" }, // 3672621020
 		{ &Z_Construct_UFunction_AGameLogic_GetRoundWinner, "GetRoundWinner" }, // 2469596556
-		{ &Z_Construct_UFunction_AGameLogic_IsEqualColumns, "IsEqualColumns" }, // 178279206
+		{ &Z_Construct_UFunction_AGameLogic_IsEqualColumns, "IsEqualColumns" }, // 2009143903
 		{ &Z_Construct_UFunction_AGameLogic_Normalization, "Normalization" }, // 3677418741
 		{ &Z_Construct_UFunction_AGameLogic_SortSuitsAndValues, "SortSuitsAndValues" }, // 2543705984
 		{ &Z_Construct_UFunction_AGameLogic_ValidateMove, "ValidateMove" }, // 207595144
@@ -791,7 +800,7 @@ void EmptyLinkFunctionForGeneratedCodeGameLogic() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AGameLogic, 1226376846);
+	IMPLEMENT_CLASS(AGameLogic, 2321601134);
 	template<> LOGICGAMEGEOM_API UClass* StaticClass<AGameLogic>()
 	{
 		return AGameLogic::StaticClass();

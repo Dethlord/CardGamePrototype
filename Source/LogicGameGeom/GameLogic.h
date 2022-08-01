@@ -59,13 +59,14 @@ public:
 	//Функция разрешенности хода
 	UFUNCTION(BlueprintCallable)
 		static bool ValidateMove(int Card, int CardOnTable, TArray<ASpawner*> PlayerHandCards, int TrumpSuit = -1);
-
+	// Функция сверки колонок(проверка на одинаковую масть относительно карты на столе)
 	UFUNCTION(BlueprintCallable)
 		static bool IsEqualColumns(int Card, int CardOnTable);
 
-	//Функция поиска наилучшего хода
+	////Функция поиска наилучшего хода
 	UFUNCTION(BlueprintCallable)
-		static int FindMove(TArray<ASpawner*> PlayerHandCards, TArray<ASpawner*> CardTableArray);
+		static ASpawner* FindMove(TArray<ASpawner*> PlayerHandCards, TArray<ASpawner*> CardTableArray, TArray<ASpawner*> CardsReleased);
+	
 	//Функция отдачи силы карты( зависит от масти или от бескозырного режима)
 	UFUNCTION(BlueprintCallable)
 	static int GetPowerCard(int Card, int TrumpSuit);

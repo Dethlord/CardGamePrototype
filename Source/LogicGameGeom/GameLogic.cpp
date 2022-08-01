@@ -210,7 +210,7 @@ FString AGameLogic::GetDebugSuitsAndValues(UPARAM(ref)TArray<int32>& Array)
 	FString value;
 	FString Suit;
 	FString Result;
-
+	
 	for (const int32 element : Array) {
 		if (element >= 49) { value = TEXT("T"); }     //Туз
 		else if (element >= 45) { value = TEXT("K"); }//Король
@@ -244,48 +244,150 @@ FString AGameLogic::GetDebugSuitsAndValues(UPARAM(ref)TArray<int32>& Array)
 
 bool AGameLogic::ValidateMove(int Card, int CardOnTable, TArray<ASpawner*> PlayerHandCards, int TrumpSuit)
 {
-	bool debug(false);
-	bool Result(false);
-	bool Bin(false);
-	int cardCol;
-	int cardOnTableCol;
-	int CurIDonHands;
-	cardCol = GetCardColumn(Card);
+	bool Debug(false),Result(false);
+	int CurIDonHands(0);
 
-	cardOnTableCol = GetCardColumn(CardOnTable);
+	if (IsEqualColumns(Card,CardOnTable)) return true;
 
-	for (ASpawner* Actor : PlayerHandCards) {
+	for (const ASpawner* Actor : PlayerHandCards) {
 		if (IsValid(Actor)){
 			CurIDonHands = Actor->IDcard;
-		   if (GetCardColumn(CurIDonHands) == cardOnTableCol){
-		   	Bin = true;
-			 break;
+		   if (IsEqualColumns(CurIDonHands, CardOnTable)){
+			   Result = true; break;
 		   }
-		if (Bin == true) break;
-	    }
+		}
     }
-	if (Bin == false) Result = true;
-	
-	if (GetCardColumn(Card) == GetCardColumn(CardOnTable)) Result = true;
-
-	if (debug){
-		for (ASpawner* Actor : PlayerHandCards) {
+		
+	if (Debug){
+		for (const ASpawner* Actor : PlayerHandCards) {
 			if (IsValid(Actor))	{
 			    UE_LOG(LogTemp, Warning, TEXT("elem %i "), Actor->IDcard);
 			}
 		}
     }
-	return Result;
+	return !Result;
 }
 
 bool AGameLogic::IsEqualColumns(int Card, int CardOnTable)
 {
 	return GetCardColumn(Card) == GetCardColumn(CardOnTable);
 }
+// ИИ на поиск лучшего хода
 
-int AGameLogic::FindMove(TArray<ASpawner*> PlayerHandCards, TArray<ASpawner*> CardTableArray)
+ASpawner* AGameLogic::FindMove(TArray<ASpawner*> PlayerHandCards, TArray<ASpawner*> CardTableArray,TArray<ASpawner*> CardsReleased)
 {
-	return 0;
+	int CurIDonReleased(0), CurIDonHand(0), MinReleased(14), CardOnTable(0), IdCardResult(0);
+	TArray<int32> PlayerReleasedCardsSuite; TArray<int32> PlayerHandCardsSuite;
+	FRandomStream Stream;
+	int Random(0);
+	ASpawner* Result = nullptr;
+	
+	if (CardsReleased.Num() > 0 && CardTableArray.Num() > 0 )// если нету вышедщих карт (то это индикатор первого хода на стол)
+	{
+		CardOnTable = CardTableArray[0]->IDcard;
+		// Добавляем вышедшие карты (которые в масть CardOnTable) в массив PlayerReleasedCardsSuite
+		
+			for (const ASpawner* Actor : CardsReleased)
+			{
+				if (IsValid(Actor))
+				{
+				
+				
+				CurIDonReleased = Actor->IDcard;
+				if (IsEqualColumns(CurIDonReleased, CardOnTable))
+
+				{
+					PlayerReleasedCardsSuite.Add(CurIDonReleased);
+				}
+                }
+			}
+			if (PlayerHandCardsSuite.Num() > 0)//сортируем массив только если он содержит элементы
+			{
+				PlayerReleasedCardsSuite.Sort(); 
+				Algo::Reverse(PlayerReleasedCardsSuite);
+           
+			//Проверяем сколько карт подряд содержатся в массиве вышедших карт PlayerReleasedCardsSuite начиная с туза
+
+			   for (const int32 element : PlayerReleasedCardsSuite)
+			      {
+				    if (NormCard(element) == MinReleased)
+				       {
+					      MinReleased--;
+				       }
+				          else 
+				       { 
+					      break; 
+				       }
+			    }
+            }
+			
+		
+		// Добавляем все карты  в PlayerHandCardsSuite(которые сходятся с мастью CardOnTable)
+		for (const ASpawner* Actor : PlayerHandCards)
+		{
+			CurIDonHand = Actor->IDcard;
+			if (IsEqualColumns(CurIDonHand, CardOnTable))
+			{
+				PlayerHandCardsSuite.Add(CurIDonHand);
+			}
+		}
+		
+		if (!(PlayerHandCardsSuite.Num() > 0)) goto rty;// Если нет на руках не одной карты которая бы соответствовала масти карты на столе
+		PlayerHandCardsSuite.Sort(); Algo::Reverse(PlayerHandCardsSuite);
+		//Первая карта в массиве PlayerHandCardsSuite будет являтся наилучшей,_
+		//_ если например у противника вышел туз, тогда MinReleased=13, а у нас к примеру лучшая дама это вес 12 , значит _
+		//_ у кого-то есть король и мы не должны бросать даму и уйдем в else
+		if (NormCard(PlayerHandCardsSuite[0]) >= MinReleased)
+		{
+			IdCardResult = PlayerHandCardsSuite[0];// Наилучшая 
+		}
+		else
+		{
+			Algo::Reverse(PlayerHandCardsSuite);
+			IdCardResult = PlayerHandCardsSuite[0];// Худшая 
+		}
+		/*if (true) {
+
+			for (const TArray<int32> tempArray : elem) {
+
+					UE_LOG(LogTemp, Warning, TEXT("elem %i "), elem);
+
+			}
+		}*/
+
+		for (ASpawner* Actor : PlayerHandCards)
+		{
+			if (IdCardResult == Actor->IDcard)
+			{
+				Result = Actor;
+			}
+
+		}
+	}
+	else // Вся логика связанная когда ИИ ходит первым
+	{
+		rty:
+		Random = Stream.FRandRange(0, PlayerHandCards.Num() - 1);
+		Result = PlayerHandCards[Random];
+		//
+		//If CardsReleased
+		//for (const int32 element : PlayerReleasedCardsSuite)
+		//{
+		//	if (NormCard(element) == MinReleased)
+		//	{
+		//		MinReleased--;
+		//	}
+		//	else
+		//	{
+		//		break;
+		//	}
+		//}
+
+	}
+
+
+
+	return Result;
 }
 
 int AGameLogic::GetPowerCard(int Card, int TrumpSuit)
