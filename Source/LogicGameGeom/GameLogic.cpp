@@ -276,52 +276,111 @@ bool AGameLogic::IsEqualColumns(int Card, int CardOnTable)
 
 ASpawner* AGameLogic::FindMove(TArray<ASpawner*> PlayerHandCards, TArray<ASpawner*> CardTableArray,TArray<ASpawner*> CardsReleased)
 {
-	int CurIDonReleased(0), CurIDonHand(0), MinReleased(14), CardOnTable(0), IdCardResult(0);
-	TArray<int32> PlayerReleasedCardsSuite; TArray<int32> PlayerHandCardsSuite;
-	FRandomStream Stream;
-	int Random(0);
+	int CurIDonReleased(0), CurIDonHand(0), MinReleased(14), SuiteCurr(0), IdCardResult(0) , MinPower(200) , CurPower(0);
+	TArray<int32> PlayersReleasedCardsSuite; TArray<int32> PlayerHandCardsSuite;
 	ASpawner* Result = nullptr;
 	
-	if (CardsReleased.Num() > 0 && CardTableArray.Num() > 0 )// если нету вышедщих карт (то это индикатор первого хода на стол)
+	// Ответная реакция ИИ когда на столе уже лежат 3 карты противников
+	if  (CardTableArray.Num() == 3)
 	{
-		CardOnTable = CardTableArray[0]->IDcard;
-		// Добавляем вышедшие карты (которые в масть CardOnTable) в массив PlayerReleasedCardsSuite
-		
-			for (const ASpawner* Actor : CardsReleased)
+        const int CardOnTable = CardTableArray[0]->IDcard;
+		// Добавляем все карты  в PlayerHandCardsSuite(которые сходятся с мастью CardOnTable)
+		for (const ASpawner* Actor : PlayerHandCards)
+		{
+			CurPower = Actor->PowerCard;
+			CurIDonHand = Actor->IDcard;
+			if (IsEqualColumns(CurIDonHand, CardOnTable))
 			{
-				if (IsValid(Actor))
+				CurPower= CurPower+50;
+				PlayerHandCardsSuite.Add(CurIDonHand);
+				// проверяем бьет ли 3 карты на столе
+				if (CurPower > CardTableArray[0]->PowerCard && CurPower > CardTableArray[1]->PowerCard && CurPower > CardTableArray[2]->PowerCard)
 				{
-				
-				
-				CurIDonReleased = Actor->IDcard;
-				if (IsEqualColumns(CurIDonReleased, CardOnTable))
+					if (CurPower <= MinPower)
+					{
+						MinPower = CurPower;
+						IdCardResult = Actor->IDcard;
+					}
 
-				{
-					PlayerReleasedCardsSuite.Add(CurIDonReleased);
 				}
-                }
+
 			}
-			if (PlayerHandCardsSuite.Num() > 0)//сортируем массив только если он содержит элементы
+		}
+		UE_LOG(LogTemp, Warning, TEXT("IdCardResult %i "), IdCardResult);
+		// Ходим наименьшей если не смогли побить не одну из 3 карт
+		if (PlayerHandCardsSuite.Num()>0)
+		{
+			if (IdCardResult==0)
 			{
-				PlayerReleasedCardsSuite.Sort(); 
-				Algo::Reverse(PlayerReleasedCardsSuite);
-           
+				IdCardResult = PlayerHandCardsSuite[PlayerHandCardsSuite.Num() - 1];// Худшая 
+			}
+		}
+		// Если нет на руках не одной карты которая бы соответствовала масти карты на столе
+		if (!(PlayerHandCardsSuite.Num() > 0))
+		{//// найти минимальную карту которая может побить все 3 карты
+			for (const ASpawner* Actor : PlayerHandCards)
+			{
+				CurPower = Actor->PowerCard;
+
+				if (CurPower > CardTableArray[0]->PowerCard && CurPower > CardTableArray[1]->PowerCard && CurPower > CardTableArray[2]->PowerCard)
+				{
+					if (CurPower <= MinPower)
+					{
+						MinPower = CurPower;
+						IdCardResult = Actor->IDcard;
+					}
+
+				}
+		
+			}
+
+		}
+
+		for (ASpawner* Actor : PlayerHandCards)
+		{
+			if (IdCardResult == Actor->IDcard)
+			{
+				return Actor;
+			}
+
+		}
+	}
+
+	if (CardsReleased.Num() > 0 && CardTableArray.Num() > 0)// если нету вышедщих карт (то это индикатор первого хода на стол)
+	{
+		const int CardOnTable = CardTableArray[0]->IDcard;
+		// Ответная реакция ИИ когда уже кто-то походил:
+		
+		// Добавляем вышедшие карты (которые в масть CardOnTable) в массив PlayerReleasedCardsSuite
+
+		for (const ASpawner* Actor : CardsReleased)
+		{
+			CurIDonReleased = Actor->IDcard;
+			if (IsEqualColumns(CurIDonReleased, CardOnTable))
+			{
+				PlayersReleasedCardsSuite.Add(CurIDonReleased);
+			}
+		}
+		if (PlayerHandCardsSuite.Num() > 0)//сортируем массив и проверяем его, только если он содержит элементы
+		{
+			PlayersReleasedCardsSuite.Sort();
+			Algo::Reverse(PlayersReleasedCardsSuite);
+
 			//Проверяем сколько карт подряд содержатся в массиве вышедших карт PlayerReleasedCardsSuite начиная с туза
 
-			   for (const int32 element : PlayerReleasedCardsSuite)
-			      {
-				    if (NormCard(element) == MinReleased)
-				       {
-					      MinReleased--;
-				       }
-				          else 
-				       { 
-					      break; 
-				       }
-			    }
-            }
-			
-		
+			for (const int32 element : PlayersReleasedCardsSuite)
+			{
+				if (NormCard(element) == MinReleased)
+				{
+					MinReleased--;
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+
 		// Добавляем все карты  в PlayerHandCardsSuite(которые сходятся с мастью CardOnTable)
 		for (const ASpawner* Actor : PlayerHandCards)
 		{
@@ -332,8 +391,30 @@ ASpawner* AGameLogic::FindMove(TArray<ASpawner*> PlayerHandCards, TArray<ASpawne
 			}
 		}
 		
-		if (!(PlayerHandCardsSuite.Num() > 0)) goto rty;// Если нет на руках не одной карты которая бы соответствовала масти карты на столе
-		PlayerHandCardsSuite.Sort(); Algo::Reverse(PlayerHandCardsSuite);
+        // Если нет на руках не одной карты которая бы соответствовала масти карты на столе
+		if (!(PlayerHandCardsSuite.Num() > 0))
+		{
+			for (const ASpawner* Actor : PlayerHandCards)
+			{
+				CurPower = Actor->PowerCard;
+				if (CurPower <= MinPower)
+				{
+					MinPower = CurPower;
+					IdCardResult = Actor->IDcard;
+				}
+			}
+
+			for (ASpawner* Actor : PlayerHandCards)
+			{
+				if (IdCardResult == Actor->IDcard)
+				{
+					return Actor;
+				}
+
+			}
+		}
+	
+		//PlayerHandCardsSuite.Sort(); Algo::Reverse(PlayerHandCardsSuite);
 		//Первая карта в массиве PlayerHandCardsSuite будет являтся наилучшей,_
 		//_ если например у противника вышел туз, тогда MinReleased=13, а у нас к примеру лучшая дама это вес 12 , значит _
 		//_ у кого-то есть король и мы не должны бросать даму и уйдем в else
@@ -343,8 +424,8 @@ ASpawner* AGameLogic::FindMove(TArray<ASpawner*> PlayerHandCards, TArray<ASpawne
 		}
 		else
 		{
-			Algo::Reverse(PlayerHandCardsSuite);
-			IdCardResult = PlayerHandCardsSuite[0];// Худшая 
+			//Algo::Reverse(PlayerHandCardsSuite);
+			IdCardResult = PlayerHandCardsSuite[PlayerHandCardsSuite.Num() - 1];// Худшая 
 		}
 		/*if (true) {
 
@@ -366,26 +447,110 @@ ASpawner* AGameLogic::FindMove(TArray<ASpawner*> PlayerHandCards, TArray<ASpawne
 	}
 	else // Вся логика связанная когда ИИ ходит первым
 	{
-		rty:
-		Random = Stream.FRandRange(0, PlayerHandCards.Num() - 1);
-		Result = PlayerHandCards[Random];
-		//
-		//If CardsReleased
-		//for (const int32 element : PlayerReleasedCardsSuite)
-		//{
-		//	if (NormCard(element) == MinReleased)
-		//	{
-		//		MinReleased--;
-		//	}
-		//	else
-		//	{
-		//		break;
-		//	}
-		//}
+		int MinReleasedCurr(14);
+		int Suite(0);
 
+		// Добавляем все вышедщие карты в массив PlayersReleasedCardsSuite (не зависимо какие масти в вышедщих)
+		if (CardsReleased.Num() > 0) {
+			for (const ASpawner* Actor : CardsReleased)
+			{
+				CurIDonReleased = Actor->IDcard;
+				PlayersReleasedCardsSuite.Add(CurIDonReleased);
+			}
+		}
+		
+		// Добавляем все карты игрока в массив PlayerHandCardsSuite( все масти не зависимо)
+		for (const ASpawner* Actor : PlayerHandCards)
+		{
+			// K♠10♠3♠9♣8♣5♣Q♦8♦7♦K♥9♥6♥4♥
+			// Узнаем одну из наибольших последовательностей вышедших карт( на какой масти она и какой порог MinReleased)
+			CurIDonHand = Actor->IDcard;
+			if (NormCard(CurIDonHand) == MinReleasedCurr)
+			{
+				MinReleasedCurr--;
+			}
+			if (MinReleasedCurr < MinReleased)
+			{
+				MinReleased = MinReleasedCurr;
+				Suite = GetCardColumn(CurIDonHand);
+			}
+			
+		}
+		
+			
+		if (Suite==0)// Индикатор того, что карты в масть вышедших вообще отсутствует либо нет еще выщедщих
+		{
+			
+			UE_LOG(LogTemp, Warning, TEXT("НЕТУ В МАСТЬ или Нет карт на столе "));
+
+			for (const ASpawner* Actor : PlayerHandCards)
+			{
+				CurPower = Actor->PowerCard;
+				if (CurPower <= MinPower)
+				{
+					MinPower = CurPower;
+					IdCardResult = Actor->IDcard;
+				}
+			}
+
+			for (ASpawner* Actor : PlayerHandCards)
+			{
+				if (IdCardResult == Actor->IDcard)
+				{
+					return Actor;
+				}
+
+			}
+
+		
+		}
+// Добавляем все карты  в PlayerHandCardsSuite(которые сходятся с одной из наилучших мастей(карты которой максимально вышли с игры)
+		for (const ASpawner* Actor : PlayerHandCards)
+		{
+			CurIDonHand = Actor->IDcard;
+			if (GetCardColumn(CurIDonHand) == Suite)
+			{
+				PlayerHandCardsSuite.Add(CurIDonHand);
+			
+			}
+		}
+		if (PlayerHandCardsSuite.Num() > 0) {
+			if (NormCard(PlayerHandCardsSuite[0]) >= MinReleased)
+			{
+				IdCardResult = PlayerHandCardsSuite[0];// Наилучшая 
+			}
+			else
+			{
+				Algo::Reverse(PlayerHandCardsSuite);
+
+				IdCardResult = PlayerHandCardsSuite[PlayerHandCardsSuite.Num() - 1];// Худшая 
+			}
+
+		}
+		else //Ситуация при которой нету козырных
+		{
+			for (const ASpawner* Actor : PlayerHandCards)
+			{
+				CurPower = Actor->PowerCard;
+				if (CurPower <= MinPower)
+				{
+					MinPower = CurPower;
+					IdCardResult = Actor->IDcard;
+				}
+			}
+		
+		
+		}
+			for (ASpawner* Actor : PlayerHandCards)
+			{
+				if (IdCardResult == Actor->IDcard)
+				{
+					Result = Actor;
+				}
+
+			}
+		
 	}
-
-
 
 	return Result;
 }
@@ -485,4 +650,6 @@ int AGameLogic::NormCard(int Card)
 
 }
 
-		
+
+
+	

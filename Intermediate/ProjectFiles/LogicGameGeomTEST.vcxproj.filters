@@ -55,5 +55,6 @@
     <ClInclude Include="..\..\Source\LogicGameGeom\Spawner.h">
       <Filter>Source\LogicGameGeom</Filter>
     </ClInclude>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

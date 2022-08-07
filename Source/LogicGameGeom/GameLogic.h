@@ -36,7 +36,7 @@ public:
 	//Фильтр нормализации значений карт(Порядковый номер в начальную стоимость)
 	UFUNCTION(BlueprintCallable)
 		static TArray<int32> Normalization(UPARAM(ref)TArray<int32>& Array);
-
+	
 	// в какой колонке  карта	
 	UFUNCTION(BlueprintCallable)
 		static int GetCardColumn(int Card);
