@@ -2,12 +2,12 @@
 	"Targets": [
 		{
 			"Name": "LogicGameGeom",
-			"Path": "C:\\UnrealProject\\LogicGameGeom TEST\\Source\\LogicGameGeom.Target.cs",
+			"Path": "C:\\UnrealProject\\LogicGameGeomTEST\\Source\\LogicGameGeom.Target.cs",
 			"Type": "Game"
 		},
 		{
 			"Name": "LogicGameGeomEditor",
-			"Path": "C:\\UnrealProject\\LogicGameGeom TEST\\Source\\LogicGameGeomEditor.Target.cs",
+			"Path": "C:\\UnrealProject\\LogicGameGeomTEST\\Source\\LogicGameGeomEditor.Target.cs",
 			"Type": "Editor"
 		}
 	]
